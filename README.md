@@ -2,6 +2,13 @@
 
 Stellar Hope is a fully transparent, decentralized charity donation platform built on the Stellar Testnet. It addresses the lack of trust and traceability in traditional NGO fundraising by logging every single donation transaction on-chain as immutable contract events and performing direct, peer-to-peer XLM token transfers from donors directly to the NGO's specified payout wallet. Additionally, NGOs can post authenticated "impact updates" directly on the ledger as milestones are hit, providing donors with verifiable, real-time updates on how their funds are being used.
 
+## 🚀 Deployed Contract Details (Stellar Testnet)
+
+* **Contract ID:** `CD7UIPWZTIQECAWAJQTLBUSLQMIHTCLICJKLGNOCEGCYO7JVDTFAVDVG`
+* **StellarExpert Contract Link:** [StellarExpert Contract Explorer](https://stellar.expert/explorer/testnet/contract/CD7UIPWZTIQECAWAJQTLBUSLQMIHTCLICJKLGNOCEGCYO7JVDTFAVDVG)
+* **Deterministic Native XLM Asset Address:** `CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC`
+
+
 ## Tech Stack
 * **Smart Contract:** Rust & Soroban SDK (`soroban-sdk = "21.0.0"`)
 * **Frontend Framework:** Next.js 14/16 (App Router)
@@ -72,24 +79,24 @@ This command compiles your Rust code into a highly optimized, light WASM binary 
 ---
 
 ## Step 3 — Deploy Contract to Testnet
-1. Deploy the compiled WASM contract directly to the Stellar Testnet using the newly created identity:
+1. Deploy the compiled and optimized WASM contract directly to the Stellar Testnet:
    ```bash
    stellar contract deploy \
-     --wasm target/wasm32-unknown-unknown/release/charity_tracker.wasm \
-     --source my-key \
+     --wasm target/wasm32v1-none/release/charity_tracker.wasm \
+     --source deployer-key \
      --network testnet
    ```
-2. Copy the returned Contract ID (looks like `CDLZFC3...` or similar) — you will need to add it to your environment file in Step 5.
+2. The deployed Contract ID is: `CD7UIPWZTIQECAWAJQTLBUSLQMIHTCLICJKLGNOCEGCYO7JVDTFAVDVG`.
 
-3. *Optional (Initialize Contract):* Initialize the contract with the native token (XLM) address (`CDLZFC3SYJYDZT7K67VZ75HPJSIZ27F6GBDG4K7K5BGBB7565EUXT6IB` on Testnet):
+3. *Initialize Contract:* Initialize the contract with the native token (XLM) address (`CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC` on Testnet):
    ```bash
    stellar contract invoke \
-     --id <YOUR_CONTRACT_ID> \
-     --source my-key \
+     --id CD7UIPWZTIQECAWAJQTLBUSLQMIHTCLICJKLGNOCEGCYO7JVDTFAVDVG \
+     --source deployer-key \
      --network testnet \
      -- \
      initialize \
-     --token CDLZFC3SYJYDZT7K67VZ75HPJSIZ27F6GBDG4K7K5BGBB7565EUXT6IB
+     --token CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC
    ```
 
 ---
@@ -111,9 +118,9 @@ This command compiles your Rust code into a highly optimized, light WASM binary 
    ```bash
    cp ../.env.example .env.local
    ```
-2. Open `.env.local` and paste your deployed Contract ID from Step 3:
+2. Open `.env.local` and paste the deployed Contract ID:
    ```env
-   NEXT_PUBLIC_CONTRACT_ID=CDLZFC3SYJYDZT7K67VZ75HPJSIZ27F6GBDG4K7K5BGBB7565EUXT6IB_YOURS
+   NEXT_PUBLIC_CONTRACT_ID=CD7UIPWZTIQECAWAJQTLBUSLQMIHTCLICJKLGNOCEGCYO7JVDTFAVDVG
    ```
 
 ---
